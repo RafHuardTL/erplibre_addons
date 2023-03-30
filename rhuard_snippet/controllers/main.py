@@ -12,3 +12,32 @@ class RafaelHuardSnippetController(http.Controller):
     )
     def dire_bonjour(self):
         return {"message": "Bonjour le monde!"}
+
+    @http.route(
+        ["/rhuard_snippet/aliments"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST", "GET"],
+        csrf=False
+    )
+    def aliments(self):
+        return {
+            "aliments": [
+                {
+                    "name": "Carotte"
+                },
+                {
+                    "name": "Lait"
+                },
+                {
+                    "name": "Chocolat"
+                },
+                {
+                    "name": "Orange"
+                },
+                {
+                    "name": "Pain"
+                }
+            ]
+        }

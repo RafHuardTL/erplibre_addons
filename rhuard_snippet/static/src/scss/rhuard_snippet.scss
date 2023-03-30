@@ -1,6 +1,37 @@
 .rhuard_snippet_container {
-    background-color: #222;
-    border-radius: 8px;
-    color: #F3F3F3;
-    padding: 1em;
+    background-color: #F0F0F0;
+    border-radius: .5rem;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.rhuard_aliment_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    &_container {
+        background-color: #FAFAFA;
+        border-radius: .5rem;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        padding: 2rem;
+    }
+}
+
+.rhuard_snippet_value_container {
+    background-color: #FAFAFA;
+    border-radius: .5rem;
+    margin-top: 1rem;
+    padding: 2rem;
+}
+
+.rhuard_aliment {
+    & + & {
+        margin-top: .5rem;
+    }
+}
+
+.rhuard_snippet_section {
+    margin-top: 2rem;
 }
