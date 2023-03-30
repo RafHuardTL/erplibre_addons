@@ -8,15 +8,27 @@
                 <h2 class="rh-snippet__heading">Défi snippet ERPLibre</h2>
                 <section class="rh-snippet__section">
                     <h3 class="rh-snippet__section__heading">Objectif 1: Obtenir des données avec HTTP</h3>
-                    <div class="rh-text__value__container">
+                    <div class="rh-snippet__section__results rh-text__value__container">
                         <div class="text-center rh-text__value">Message</div>
                     </div>
                 </section>
                 <section class="rh-snippet__section">
-                    <h3 class="rh-snippet_section__heading">Objectif 2: Obtenir une liste d'aliments</h3>
-                    <div class="rh-aliment__list__container">
-                    <ul class="rh-aliment__list"></ul>
-                </div>
+                    <h3 class="rh-snippet__section__heading">Objectif 2: Obtenir une liste d'aliments</h3>
+                    <div class="rh-snippet__section__results rh-aliment__list__container">
+                        <ul class="rh-aliment__list"></ul>
+                    </div>
+                </section>
+                <section class="rh-snippet__section">
+                    <h3 class="rh-snippet__section__heading">Objectif 3: Pouvoir envoyer une requête POST</h3>
+                    <div class="rh-snippet__section__results">
+                        <form class="rh-add-aliment__form">
+                            <input type="text" class="rh-add-aliment__input" placeholder="Aliment" />
+                            <input type="submit" class="rh-add-aliment__submit" value="Envoyer" />
+                        </form>
+                        <div class="rh-add-aliment__list__container">
+                            <ul class="rh-add-aliment__list"></ul>
+                        </div>
+                    </div>
                 </section>
             </div>
         </section>
