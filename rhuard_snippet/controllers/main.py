@@ -11,7 +11,7 @@ class RafaelHuardSnippetController(http.Controller):
         csrf=False,
     )
     def dire_bonjour(self):
-        return {"message": "Bonjour le monde!"}
+        return {"message": "Bonjour, le monde!"}
 
     @http.route(
         ["/rhuard_snippet/aliments"],

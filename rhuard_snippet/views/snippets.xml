@@ -4,18 +4,18 @@
     <!-- Snippets -->
     <template id="s_rhuard_snippet" name="Rafaël Huard Snippet">
         <section class="o_rhuard_snippet">
-            <div class="container rhuard_snippet_container">
-                <h2 class="rhuard_snippet_heading">Défi snippet ERPLibre</h2>
-                <section class="rhuard_snippet_section">
-                    <h3 class="rhuard_snippet_section_heading">Objectif 1: Obtenir des données avec HTTP</h3>
-                    <div class="rhuard_snippet_value_container">
-                        <div class="text-center rhuard_snippet_value">Message</div>
+            <div class="container rh-snippet__container">
+                <h2 class="rh-snippet__heading">Défi snippet ERPLibre</h2>
+                <section class="rh-snippet__section">
+                    <h3 class="rh-snippet__section__heading">Objectif 1: Obtenir des données avec HTTP</h3>
+                    <div class="rh-text__value__container">
+                        <div class="text-center rh-text__value">Message</div>
                     </div>
                 </section>
-                <section class="rhuard_snippet_section">
-                    <h3 class="rhuard_snippet_section_heading">Objectif 2: Obtenir une liste d'aliments</h3>
-                    <div class="rhuard_aliment_list_container">
-                    <ul class="rhuard_aliment_list"></ul>
+                <section class="rh-snippet__section">
+                    <h3 class="rh-snippet_section__heading">Objectif 2: Obtenir une liste d'aliments</h3>
+                    <div class="rh-aliment__list__container">
+                    <ul class="rh-aliment__list"></ul>
                 </div>
                 </section>
             </div>

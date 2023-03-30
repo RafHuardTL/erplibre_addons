@@ -1,15 +1,15 @@
-.rhuard_snippet_container {
+.rh-snippet__container {
     background-color: #F0F0F0;
     border-radius: .5rem;
     margin: 2rem auto;
     padding: 2rem;
 }
 
-.rhuard_aliment_list {
+.rh-aliment__list {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    &_container {
+    &__container {
         background-color: #FAFAFA;
         border-radius: .5rem;
         display: flex;
@@ -19,19 +19,19 @@
     }
 }
 
-.rhuard_snippet_value_container {
+.rh-text__value__container {
     background-color: #FAFAFA;
     border-radius: .5rem;
     margin-top: 1rem;
     padding: 2rem;
 }
 
-.rhuard_aliment {
+.rh-aliment {
     & + & {
         margin-top: .5rem;
     }
 }
 
-.rhuard_snippet_section {
+.rh-snippet__section {
     margin-top: 2rem;
 }

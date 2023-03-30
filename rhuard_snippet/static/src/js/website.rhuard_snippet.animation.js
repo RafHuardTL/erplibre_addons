@@ -10,8 +10,8 @@ odoo.define("rhuard_snippet.animation", function (require) {
             let self = this;
             let _super = self._super.bind(this);
 
-            this._eventListText = this.$(".rhuard_snippet_value");
-            this._eventListAliments = this.$(".rhuard_aliment_list");
+            this._eventListText = this.$(".rh-text__value");
+            this._eventListAliments = this.$(".rh-aliment__list");
 
             this._originalContentText = this._eventListText.text();
             this._originalContentAliments = this._eventListAliments.html();
