@@ -89,8 +89,28 @@ class RafaelHuardSnippetController(http.Controller):
             return False
 
         new_aliment = {
-            "id": uuid.uuid4(),
+            "id": str(uuid.uuid4()),
             "name": kwargs.get("aliment_name")
         }
         self.aliment_list.get("aliments").append(new_aliment)
         return new_aliment
+
+    @http.route(
+        ["/rhuard_snippet/delete_aliment"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST"],
+        csrf=False
+    )
+    def delete_aliment(self, **kwargs):
+        if not kwargs.get("aliment_id"):
+            return False
+
+        for aliment in self.aliment_list.get("aliments"):
+            if aliment.get("id") == kwargs.get("aliment_id"):
+                aliment_list = self.aliment_list.get("aliments")
+                aliment_list.remove(aliment)
+                return aliment
+
+        return False

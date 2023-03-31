@@ -30,6 +30,18 @@
                         </div>
                     </div>
                 </section>
+                <section class="rh-snippet__section">
+                    <h3 class="rh-snippet__section__heading">Objectif 4: Pouvoir supprimer un aliment</h3>
+                    <div class="rh-snippet__section__results">
+                        <form class="rh-delete-aliment__form">
+                            <input type="text" class="rh-delete-aliment__input" placeholder="Aliment" />
+                            <input type="submit" class="rh-delete-aliment__submit" value="Envoyer" />
+                        </form>
+                        <div class="rh-delete-aliment__list__container">
+                            <ul class="rh-delete-aliment__list"></ul>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
     </template>
