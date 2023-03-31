@@ -9,6 +9,12 @@
     align-items: center;
     display: flex;
     gap: 0.75rem;
+    width: 100%;
+    &__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
     &__list {
         list-style-type: none;
         margin: 0;
@@ -25,29 +31,31 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        &:empty &__container {
-            display: none;
-        }
     }
 }
 
 .rh-delete-aliment__button {
-        align-items: center;
-        background-color: #c00;
-        border-radius: 0.125rem;
-        cursor: pointer;
-        display: flex;
-        height: 1rem;
-        justify-content: center;
-        width: 1rem;
-        &::after {
-            content: "x";
-            color: #F3F3F3;
-            font-family: monospace;
-            font-weight: bold;
-            pointer-events: none;
-        }
+    align-items: center;
+    background-color: #c00;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    display: flex;
+    height: 1rem;
+    justify-content: center;
+    min-width: 1rem;
+    &::after {
+        content: "x";
+        color: #F3F3F3;
+        font-family: monospace;
+        font-weight: bold;
+        pointer-events: none;
     }
+}
+
+.rh-delete-aliment__list__container {
+    width: 100%;
+    max-width: 15rem;
+}
 
 .rh-snippet__section {
     margin-top: 2rem;
