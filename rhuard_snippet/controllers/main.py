@@ -3,11 +3,12 @@ import uuid
 
 
 class RafaelHuardSnippetController(http.Controller):
-    aliment_list = dict()
-    aliment_list_hardcoded = dict()
+    obj2_aliment_list = dict()
+    obj3_aliment_list = dict()
+    obj4_aliment_list = dict()
 
     def __init__(self):
-        self.aliment_list_hardcoded = {
+        self.obj2_aliment_list = {
             "aliments": [
                 {
                     "id": 1,
@@ -31,7 +32,10 @@ class RafaelHuardSnippetController(http.Controller):
                 }
             ]
         }
-        self.aliment_list = {
+        self.obj3_aliment_list = {
+            "aliments": []
+        }
+        self.obj4_aliment_list = {
             "aliments": []
         }
 
@@ -47,41 +51,52 @@ class RafaelHuardSnippetController(http.Controller):
         return {"message": "Bonjour, le monde!"}
 
     @http.route(
-        ["/rhuard_snippet/aliments_hardcoded"],
+        ["/rhuard_snippet/obj2_aliments"],
         type="json",
         auth="public",
         website=True,
         methods=["POST", "GET"],
         csrf=False,
     )
-    def aliments_hardcoded(self):
-        return self.aliment_list_hardcoded
+    def get_obj2_aliments(self):
+        return self.obj2_aliment_list
 
     @http.route(
-        ["/rhuard_snippet/aliments"],
+        ["/rhuard_snippet/obj3_aliments"],
         type="json",
         auth="public",
         website=True,
         methods=["POST", "GET"],
         csrf=False,
     )
-    def aliments(self):
-        return self.aliment_list
+    def get_obj3_aliments(self):
+        return self.obj3_aliment_list
 
     @http.route(
-        ["/rhuard_snippet/add_aliment"],
+        ["/rhuard_snippet/obj4_aliments"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST", "GET"],
+        csrf=False,
+    )
+    def get_obj4_aliments(self):
+        return self.obj4_aliment_list
+
+    @http.route(
+        ["/rhuard_snippet/obj3_add_aliment"],
         type="json",
         auth="public",
         website=True,
         methods=["POST"],
         csrf=False,
     )
-    def add_aliment(self, **kwargs):
+    def obj3_add_aliment(self, **kwargs):
         if not kwargs.get("aliment_name"):
             return False
 
         aliments_with_same_name = tuple((
-            aliment for aliment in self.aliment_list.get("aliments")
+            aliment for aliment in self.obj3_aliment_list.get("aliments")
             if aliment["name"] == kwargs.get("aliment_name")
         ))
 
@@ -92,7 +107,34 @@ class RafaelHuardSnippetController(http.Controller):
             "id": str(uuid.uuid4()),
             "name": kwargs.get("aliment_name")
         }
-        self.aliment_list.get("aliments").append(new_aliment)
+        self.obj3_aliment_list.get("aliments").append(new_aliment)
+        return new_aliment
+
+    @http.route(
+        ["/rhuard_snippet/obj4_add_aliment"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST"],
+        csrf=False,
+    )
+    def obj4_add_aliment(self, **kwargs):
+        if not kwargs.get("aliment_name"):
+            return False
+
+        aliments_with_same_name = tuple((
+            aliment for aliment in self.obj4_aliment_list.get("aliments")
+            if aliment["name"] == kwargs.get("aliment_name")
+        ))
+
+        if len(aliments_with_same_name) > 0:
+            return False
+
+        new_aliment = {
+            "id": str(uuid.uuid4()),
+            "name": kwargs.get("aliment_name")
+        }
+        self.obj4_aliment_list.get("aliments").append(new_aliment)
         return new_aliment
 
     @http.route(
@@ -107,9 +149,9 @@ class RafaelHuardSnippetController(http.Controller):
         if not kwargs.get("aliment_id"):
             return False
 
-        for aliment in self.aliment_list.get("aliments"):
+        for aliment in self.obj4_aliment_list.get("aliments"):
             if aliment.get("id") == kwargs.get("aliment_id"):
-                aliment_list = self.aliment_list.get("aliments")
+                aliment_list = self.obj4_aliment_list.get("aliments")
                 aliment_list.remove(aliment)
                 return aliment
 

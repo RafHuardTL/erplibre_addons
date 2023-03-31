@@ -32,12 +32,12 @@ odoo.define("rhuard_snippet.animation", function (require) {
             $(this._obj4Input).val("");
 
             const def1 = this.bonjour(self, this._obj1Text);
-            const def2 = this.updateAliments(self, this._obj2ListAliments, "/rhuard_snippet/aliments_hardcoded");
-            const def3 = this.updateAliments(self, this._obj3ListAliments, "/rhuard_snippet/aliments");
-            const def4 = this.updateAlimentsObj4(self, this._obj4ListAliments, "/rhuard_snippet/aliments");
+            const def2 = this.updateAliments(self, this._obj2ListAliments, "/rhuard_snippet/obj2_aliments");
+            const def3 = this.updateAliments(self, this._obj3ListAliments, "/rhuard_snippet/obj3_aliments");
+            const def4 = this.updateAlimentsObj4(self, this._obj4ListAliments, "/rhuard_snippet/obj4_aliments");
 
-            this.add_aliment(self, this._obj3Form, this._obj3Input);
-            this.add_aliment(self, this._obj4Form, this._obj4Input);
+            this.add_aliment_obj3(self, this._obj3Form, this._obj3Input);
+            this.add_aliment_obj4(self, this._obj4Form, this._obj4Input);
             this.delete_aliment(self, this._obj4ListAliments);
 
             return $.when(def1, def2, def3, def4).done(function () {
@@ -114,12 +114,16 @@ odoo.define("rhuard_snippet.animation", function (require) {
                 for (const aliment of aliments) {
                     const el = document.createElement("li");
                     el.id = aliment.id;
-                    el.textContent = aliment.name;
                     el.className = "rh-aliment";
+
+                    const text = document.createElement("span");
+                    text.className = "rh-aliment__text";
+                    text.textContent = aliment.name;
 
                     const delBtn = document.createElement("div");
                     delBtn.className = "rh-delete-aliment__button";
 
+                    el.append(text);
                     el.append(delBtn);
                     eventList.append(el);
                 }
@@ -133,7 +137,7 @@ odoo.define("rhuard_snippet.animation", function (require) {
 
             return def;
         },
-        add_aliment: function (self, form, input) {
+        add_aliment_obj3: function (self, form, input) {
             $(form).submit(function (event) {
                 event.preventDefault();
 
@@ -142,12 +146,30 @@ odoo.define("rhuard_snippet.animation", function (require) {
                 }
 
                 ajax.jsonRpc(
-                    "/rhuard_snippet/add_aliment",
+                    "/rhuard_snippet/obj3_add_aliment",
                     "call",
                     {"aliment_name": $(input).val()}
                 ).done(function (data) {
-                    self.updateAliments(self, self._obj3ListAliments, "/rhuard_snippet/aliments")
-                    self.updateAlimentsObj4(self, self._obj4ListAliments, "/rhuard_snippet/aliments")
+                    $(input).val("");
+                    self.updateAliments(self, self._obj3ListAliments, "/rhuard_snippet/obj3_aliments")
+                });
+            })
+        },
+        add_aliment_obj4: function (self, form, input) {
+            $(form).submit(function (event) {
+                event.preventDefault();
+
+                if (!$(input).val()) {
+                    return;
+                }
+
+                ajax.jsonRpc(
+                    "/rhuard_snippet/obj4_add_aliment",
+                    "call",
+                    {"aliment_name": $(input).val()}
+                ).done(function (data) {
+                    $(input).val("");
+                    self.updateAlimentsObj4(self, self._obj4ListAliments, "/rhuard_snippet/obj4_aliments")
                 });
             })
         },
@@ -164,8 +186,7 @@ odoo.define("rhuard_snippet.animation", function (require) {
                     "call",
                     {"aliment_id": aliment_id}
                 ).done (function (data) {
-                    self.updateAliments(self, self._obj3ListAliments, "/rhuard_snippet/aliments")
-                    self.updateAlimentsObj4(self, self._obj4ListAliments, "/rhuard_snippet/aliments")
+                    self.updateAlimentsObj4(self, self._obj4ListAliments, "/rhuard_snippet/obj4_aliments")
                 });
             });
         },
