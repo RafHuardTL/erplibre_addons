@@ -16,7 +16,7 @@ odoo.define("rhuard_snippet.animation", function (require) {
             // Objectif 2
             this._obj2ListAliments = this.$(".rh-aliment__list");
             // Objectif 3
-            this.__obj3Form = this.$(".rh-add-aliment__form");
+            this._obj3Form = this.$(".rh-add-aliment__form");
             this._obj3Input = this.$(".rh-add-aliment__input");
             this._obj3ListAliments = this.$(".rh-add-aliment__list");
             // Objectif 4
