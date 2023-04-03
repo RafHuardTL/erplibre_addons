@@ -26,7 +26,8 @@
 }
 
 .rh-add-aliment,
-.rh-delete-aliment {
+.rh-delete-aliment,
+.rh-update-aliment {
     &__list {
         list-style-type: none;
         margin: 0;
@@ -52,7 +53,8 @@
     }
 }
 
-.rh-delete-aliment__list__container {
+.rh-delete-aliment__list__container,
+.rh-update-aliment__list__container {
     width: 100%;
     max-width: 15rem;
 }

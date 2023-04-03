@@ -6,6 +6,7 @@ class RafaelHuardSnippetController(http.Controller):
     obj2_aliment_list = dict()
     obj3_aliment_list = dict()
     obj4_aliment_list = dict()
+    obj5_aliment_list = dict()
 
     def __init__(self):
         self.obj2_aliment_list = {
@@ -36,6 +37,9 @@ class RafaelHuardSnippetController(http.Controller):
             "aliments": []
         }
         self.obj4_aliment_list = {
+            "aliments": []
+        }
+        self.obj5_aliment_list = {
             "aliments": []
         }
 
@@ -82,6 +86,17 @@ class RafaelHuardSnippetController(http.Controller):
     )
     def get_obj4_aliments(self):
         return self.obj4_aliment_list
+
+    @http.route(
+        ["/rhuard_snippet/obj5_aliments"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST", "GET"],
+        csrf=False,
+    )
+    def get_obj5_aliments(self):
+        return self.obj5_aliment_list
 
     @http.route(
         ["/rhuard_snippet/obj3_add_aliment"],
@@ -138,14 +153,41 @@ class RafaelHuardSnippetController(http.Controller):
         return new_aliment
 
     @http.route(
-        ["/rhuard_snippet/delete_aliment"],
+        ["/rhuard_snippet/obj5_add_aliment"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST"],
+        csrf=False,
+    )
+    def obj5_add_aliment(self, **kwargs):
+        if not kwargs.get("aliment_name"):
+            return False
+
+        aliments_with_same_name = tuple((
+            aliment for aliment in self.obj5_aliment_list.get("aliments")
+            if aliment["name"] == kwargs.get("aliment_name")
+        ))
+
+        if len(aliments_with_same_name) > 0:
+            return False
+
+        new_aliment = {
+            "id": str(uuid.uuid4()),
+            "name": kwargs.get("aliment_name")
+        }
+        self.obj5_aliment_list.get("aliments").append(new_aliment)
+        return new_aliment
+
+    @http.route(
+        ["/rhuard_snippet/obj4_delete_aliment"],
         type="json",
         auth="public",
         website=True,
         methods=["POST"],
         csrf=False
     )
-    def delete_aliment(self, **kwargs):
+    def obj4_delete_aliment(self, **kwargs):
         if not kwargs.get("aliment_id"):
             return False
 
@@ -154,5 +196,46 @@ class RafaelHuardSnippetController(http.Controller):
                 aliment_list = self.obj4_aliment_list.get("aliments")
                 aliment_list.remove(aliment)
                 return aliment
+
+        return False
+
+    @http.route(
+        ["/rhuard_snippet/obj5_delete_aliment"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST"],
+        csrf=False
+    )
+    def obj5_delete_aliment(self, **kwargs):
+        if not kwargs.get("aliment_id"):
+            return False
+
+        for aliment in self.obj5_aliment_list.get("aliments"):
+            if aliment.get("id") == kwargs.get("aliment_id"):
+                aliment_list = self.obj5_aliment_list.get("aliments")
+                aliment_list.remove(aliment)
+                return aliment
+
+        return False
+
+    @http.route(
+        ["/rhuard_snippet/update_aliment"],
+        type="json",
+        auth="public",
+        website=True,
+        methods=["POST"],
+        csrf=False
+    )
+    def update_aliment(self, **kwargs):
+        if not kwargs.get("aliment_id") or not kwargs.get("new_name"):
+            return False
+
+        aliment_list = self.obj5_aliment_list.get("aliments")
+
+        for i in range(len(aliment_list)):
+            if aliment_list[i].get("id") == kwargs.get("aliment_id"):
+                aliment_list[i]["name"] = kwargs.get("new_name")
+                return aliment_list[i]
 
         return False

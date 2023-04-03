@@ -19,7 +19,7 @@
                     </div>
                 </section>
                 <section class="rh-snippet__section">
-                    <h3 class="rh-snippet__section__heading">Objectif 3: Pouvoir envoyer une requête POST</h3>
+                    <h3 class="rh-snippet__section__heading">Objectif 3: Pouvoir ajouter un aliment</h3>
                     <div class="rh-snippet__section__results">
                         <form class="rh-add-aliment__form">
                             <input type="text" class="rh-add-aliment__input" placeholder="Aliment" />
@@ -39,6 +39,18 @@
                         </form>
                         <div class="rh-delete-aliment__list__container">
                             <ul class="rh-delete-aliment__list"></ul>
+                        </div>
+                    </div>
+                </section>
+                <section class="rh-snippet__section">
+                    <h3 class="rh-snippet__section__heading">Objectif 5: Pouvoir modifier un aliment</h3>
+                    <div class="rh-snippet__section__results">
+                        <form class="rh-update-aliment__form">
+                            <input type="text" class="rh-update-aliment__input" placeholder="Aliment" />
+                            <input type="submit" class="rh-update-aliment__submit" value="Envoyer" />
+                        </form>
+                        <div class="rh-update-aliment__list__container">
+                            <ul class="rh-update-aliment__list"></ul>
                         </div>
                     </div>
                 </section>
