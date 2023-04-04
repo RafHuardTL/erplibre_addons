@@ -11,9 +11,14 @@
     gap: 0.75rem;
     width: 100%;
     &__text {
+        border-radius: 0.125em;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 100%;
+        &:hover,
+        &:focus {
+            background-color: #EEE;
+        }
     }
     &-list {
         list-style-type: none;
