@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Snippets -->
+    <template id="s_rhuard_aliments" name="Rafaël Huard Aliments">
+        <section class="o_rhuard_aliments">
+            <div class="container snippet-container">
+                <section class="snippet-section">
+                    <h3 class="snippet-section__heading">Aliments</h3>
+                    <div class="snippet-section__results">
+                        <form class="aliment-form">
+                            <input type="text" class="aliment__input" placeholder="Aliment" />
+                            <input type="submit" class="aliment__submit" value="Envoyer" />
+                        </form>
+                        <div class="aliment-list__container">
+                            <ul class="aliment-list">
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </template>
+    <!-- Add snippets to menu -->
+    <template id="snippet_effect" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_effect']/div[hasclass('o_panel_body')]" position="inside">
+            <t
+                t-snippet="rhuard_aliments.s_rhuard_aliments"
+                t-thumbnail="/rhuard_aliments/static/description/icon.png"
+            />
+        </xpath>
+    </template>
+    <!-- Add stylesheet and Javascript -->
+    <template id="assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="//link[last()]" position="after">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/rhuard_aliments/static/src/scss/rhuard_aliments.scss"
+            />
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/rhuard_aliments/static/src/js/website.rhuard_aliments.animation.js"
+            />
+        </xpath>
+    </template>
+</odoo>
