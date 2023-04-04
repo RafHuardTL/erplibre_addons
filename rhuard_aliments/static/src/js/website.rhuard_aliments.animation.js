@@ -35,6 +35,7 @@ odoo.define("rhuard_aliments.animation", require => {
                 }
 
                 if (_.isEmpty(data)) {
+                    self._$loadedContent = data;
                     self._alimentList.innerHTML = "";
                     self._alimentList.parentElement.style.display = "none";
                     return;
@@ -108,7 +109,11 @@ odoo.define("rhuard_aliments.animation", require => {
             self.el.addEventListener("keyup", event => {
                 event.preventDefault();
 
-                console.log(event.target);
+                if (event.which === 13) {
+                    event.target.innerHTML = event.target.textContent;
+                    event.target.blur();
+                    return false;
+                }
 
                 if (!event.target.classList.contains("aliment__text")) {
                     return;
@@ -125,7 +130,6 @@ odoo.define("rhuard_aliments.animation", require => {
                         "aliment_name": alimentName
                     }
                 ).done(data => {
-                    console.log(data);
                     return true;
                 })
             });
@@ -133,7 +137,7 @@ odoo.define("rhuard_aliments.animation", require => {
         destroy: function () {
             this._super.apply(this, arguments);
             if (this._$loadedContent) {
-                this._alimentList.html(this.originalContent);
+                this._alimentList.innerHTML = this._originalContent;
             }
         }
     });

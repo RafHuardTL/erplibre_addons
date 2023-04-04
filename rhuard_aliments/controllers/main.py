@@ -1,10 +1,7 @@
 from odoo import http
-from uuid import uuid4
 
 
 class RHuardAlimentsController(http.Controller):
-
-    aliments = list()
 
     @http.route(
         ["/rhuard_aliments/aliments"],
@@ -15,7 +12,14 @@ class RHuardAlimentsController(http.Controller):
         csrf=False,
     )
     def get_aliments(self):
-        return self.aliments
+        aliment_response = http.request.env["rhuard.aliment"].search([])
+        aliments = list()
+        for aliment in aliment_response:
+            aliments.append({
+                "id": aliment["id"],
+                "name": aliment["name"]
+            })
+        return aliments
 
     @http.route(
         ["/rhuard_aliments/add_aliment"],
@@ -31,20 +35,14 @@ class RHuardAlimentsController(http.Controller):
         if not aliment_name:
             return False
 
-        aliments_with_same_name = tuple(
-            aliment for aliment in self.aliments
-            if aliment["name"] == aliment_name
-        )
+        aliments_with_same_name = http.request.env["rhuard.aliment"].search([("name", "=", aliment_name)])
 
         if len(aliments_with_same_name) != 0:
             return False
 
-        new_aliment = {
-            "id": str(uuid4()),
-            "name": aliment_name
-        }
+        new_aliment = {"name": aliment_name}
 
-        self.aliments.append(new_aliment)
+        http.request.env["rhuard.aliment"].create(new_aliment)
         return new_aliment
 
     @http.route(
@@ -61,12 +59,8 @@ class RHuardAlimentsController(http.Controller):
         if not aliment_id:
             return False
 
-        for aliment in self.aliments:
-            if aliment["id"] == aliment_id:
-                self.aliments.remove(aliment)
-                return True
-
-        return False
+        http.request.env["rhuard.aliment"].search([("id", "=", aliment_id)], limit=1).unlink()
+        return True
 
     @http.route(
         ["/rhuard_aliments/update_aliment"],
@@ -82,10 +76,7 @@ class RHuardAlimentsController(http.Controller):
         if not aliment_id:
             return False
 
-        for aliment in self.aliments:
-            if aliment["id"] == aliment_id:
-                aliment["name"] = aliment_name
-                return aliment
-
-        return False
+        matching_aliment = http.request.env["rhuard.aliment"].search([("id", "=", aliment_id)], limit=1)
+        matching_aliment.write({"name": aliment_name})
+        return True
 

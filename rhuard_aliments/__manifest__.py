@@ -6,6 +6,9 @@
     "license": "AGPL-3",
     "application": True,
     "depends": ["website"],
-    "data": ["views/snippets.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/snippets.xml"
+    ],
     "installable": True
 }
