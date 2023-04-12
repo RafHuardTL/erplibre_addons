@@ -1,15 +1,16 @@
-import {RequestHandler} from "./request-handler.js";
-
-odoo.define("rhuard_aliments.animation", require => {
+odoo.define("xmlrpc_base.animation", require => {
     "use strict";
 
     let sAnimation = require("website.content.snippets.animation");
     let ajax = require("web.ajax");
+    let RequestHandler = require("xmlrpc_base.request-handler");
 
-    sAnimation.registry.rhuard_aliments = sAnimation.Class.extend({
-        selector: ".o_rhuard_aliments",
+    sAnimation.registry.xmlrpc_base = sAnimation.Class.extend({
+        selector: ".o_xmlrpc_base",
 
         start: function () {
+            RequestHandler.afficher();
+
             let self = this;
 
             this._alimentList = this.el.getElementsByClassName("aliment-list")[0];
@@ -30,7 +31,7 @@ odoo.define("rhuard_aliments.animation", require => {
         },
         getAliments: function (self) {
             let def = self._rpc({
-                route: "/rhuard_aliments/aliments"
+                route: "/xmlrpc_base/aliments"
             }).then(function (data) {
                 if (data.error) {
                     return;
@@ -73,7 +74,7 @@ odoo.define("rhuard_aliments.animation", require => {
                 event.preventDefault();
 
                 ajax.jsonRpc(
-                    "/rhuard_aliments/add_aliment",
+                    "/xmlrpc_base/add_aliment",
                     "call",
                     {"aliment_name": self._input.value}
                 ).done(data => {
@@ -99,7 +100,7 @@ odoo.define("rhuard_aliments.animation", require => {
                 const aliment_id = event.target.parentElement.id;
 
                 ajax.jsonRpc(
-                    "/rhuard_aliments/delete_aliment",
+                    "/xmlrpc_base/delete_aliment",
                     "call",
                     {"aliment_id": aliment_id}
                 ).done(data => {
@@ -125,7 +126,7 @@ odoo.define("rhuard_aliments.animation", require => {
                 const alimentName = event.target.textContent;
 
                 ajax.jsonRpc(
-                    "/rhuard_aliments/update_aliment",
+                    "/xmlrpc_base/update_aliment",
                     "call",
                     {
                         "aliment_id": alimentId,

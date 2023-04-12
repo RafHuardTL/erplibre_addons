@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_rhuard_aliment,access_rhuard_aliment,model_rhuard_aliment,base.group_user,1,1,1,1
+access_xmlrpc_base_aliment,access_xmlrpc_base_aliment,model_xmlrpc_base_aliment,base.group_user,1,1,1,1

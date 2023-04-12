@@ -2,8 +2,8 @@
 <!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <!-- Snippets -->
-    <template id="s_rhuard_aliments" name="Rafaël Huard Aliments">
-        <section class="o_rhuard_aliments">
+    <template id="s_xmlrpc_base" name="XmlRpc Base">
+        <section class="o_xmlrpc_base">
             <div class="container snippet-container">
                 <section class="snippet-section">
                     <h3 class="snippet-section__heading">Aliments</h3>
@@ -26,8 +26,8 @@
     <template id="snippet_effect" inherit_id="website.snippets">
         <xpath expr="//div[@id='snippet_effect']/div[hasclass('o_panel_body')]" position="inside">
             <t
-                t-snippet="rhuard_aliments.s_rhuard_aliments"
-                t-thumbnail="/rhuard_aliments/static/description/icon.png"
+                t-snippet="xmlrpc_base.s_xmlrpc_base"
+                t-thumbnail="/xmlrpc_base/static/description/icon.png"
             />
         </xpath>
     </template>
@@ -37,13 +37,17 @@
             <link
                 rel="stylesheet"
                 type="text/scss"
-                href="/rhuard_aliments/static/src/scss/rhuard_aliments.scss"
+                href="/xmlrpc_base/static/src/scss/xmlrpc_base.scss"
             />
         </xpath>
         <xpath expr="//script[last()]" position="after">
             <script
                 type="text/javascript"
-                src="/rhuard_aliments/static/src/js/website.rhuard_aliments.animation.js"
+                src="/xmlrpc_base/static/src/js/request-handler.js"
+            />
+            <script
+                type="text/javascript"
+                src="/xmlrpc_base/static/src/js/website.xmlrpc_base.animation.js"
             />
         </xpath>
     </template>

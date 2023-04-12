@@ -1,5 +1,5 @@
 {
-    "name": "Rafaël Huard Aliments",
+    "name": "XmlRpc Base",
     "category": "Website",
     "version": "1.0.0",
     "author": "Rafaël Huard",
