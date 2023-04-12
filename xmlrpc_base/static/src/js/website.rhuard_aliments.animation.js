@@ -1,3 +1,5 @@
+import {RequestHandler} from "./request-handler.js";
+
 odoo.define("rhuard_aliments.animation", require => {
     "use strict";
 
