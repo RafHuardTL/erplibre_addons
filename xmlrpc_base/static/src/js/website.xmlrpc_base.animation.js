@@ -2,15 +2,12 @@ odoo.define("xmlrpc_base.animation", require => {
     "use strict";
 
     let sAnimation = require("website.content.snippets.animation");
-    let ajax = require("web.ajax");
     let RequestHandler = require("xmlrpc_base.request-handler");
 
     sAnimation.registry.xmlrpc_base = sAnimation.Class.extend({
         selector: ".o_xmlrpc_base",
 
         start: function () {
-            RequestHandler.afficher();
-
             let self = this;
 
             this._alimentList = this.el.getElementsByClassName("aliment-list")[0];
@@ -30,9 +27,7 @@ odoo.define("xmlrpc_base.animation", require => {
             return $.when(this._super.apply(this, arguments), def);
         },
         getAliments: function (self) {
-            let def = self._rpc({
-                route: "/xmlrpc_base/aliments"
-            }).then(function (data) {
+            let def = RequestHandler.get(self, "/xmlrpc_base/aliments", function (data) {
                 if (data.error) {
                     return;
                 }
@@ -73,11 +68,7 @@ odoo.define("xmlrpc_base.animation", require => {
             self._form.addEventListener("submit", event => {
                 event.preventDefault();
 
-                ajax.jsonRpc(
-                    "/xmlrpc_base/add_aliment",
-                    "call",
-                    {"aliment_name": self._input.value}
-                ).done(data => {
+                RequestHandler.post("/xmlrpc_base/add_aliment", {"aliment_name": self._input.value}, data => {
                     if (data.error) {
                         return;
                     }
@@ -88,7 +79,7 @@ odoo.define("xmlrpc_base.animation", require => {
 
                     self._input.value = "";
                     self.getAliments(self)
-                })
+                });
             });
         },
         deleteAliment: function (self) {
@@ -99,11 +90,7 @@ odoo.define("xmlrpc_base.animation", require => {
 
                 const aliment_id = event.target.parentElement.id;
 
-                ajax.jsonRpc(
-                    "/xmlrpc_base/delete_aliment",
-                    "call",
-                    {"aliment_id": aliment_id}
-                ).done(data => {
+                RequestHandler.post("/xmlrpc_base/delete_aliment", {"aliment_id": aliment_id}, data => {
                     self.getAliments(self)
                 });
             });
@@ -125,16 +112,18 @@ odoo.define("xmlrpc_base.animation", require => {
                 const alimentId = event.target.parentElement.id;
                 const alimentName = event.target.textContent;
 
-                ajax.jsonRpc(
+                // New one
+
+                RequestHandler.post(
                     "/xmlrpc_base/update_aliment",
-                    "call",
                     {
                         "aliment_id": alimentId,
                         "aliment_name": alimentName
+                    },
+                    data => {
+                        return true;
                     }
-                ).done(data => {
-                    return true;
-                })
+                );
             });
         },
         destroy: function () {

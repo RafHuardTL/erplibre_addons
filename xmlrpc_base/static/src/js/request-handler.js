@@ -1,15 +1,21 @@
 odoo.define("xmlrpc_base.request-handler", require => {
     "use strict";
 
+    let ajax = require("web.ajax");
+
     class RequestHandler {
-        static get(context, url, callback) {
-            //
+        static get(context, route, callback) {
+            const def = context._rpc({
+                route: route
+            }).then(data => {
+                callback(data);
+            });
+            return def;
         }
-        static post(context, url, params, callback) {
-            //
-        }
-        static afficher() {
-            console.log("Module fonctionnel.")
+        static post(route, params, callback) {
+            const def = ajax.jsonRpc(route, "call", params).done(data => {
+                callback(data);
+            });
         }
     }
 
