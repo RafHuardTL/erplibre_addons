@@ -9,3 +9,6 @@ class AlimentModel(models.Model):
     html = fields.Html(string="aliment_html")
     date = fields.Date(string="aliment_date")
     datetime = fields.Datetime(string="aliment_datetime")
+    int = fields.Integer(string="aliment_int")
+    float = fields.Float(string="aliment_float")
+    bool = fields.Boolean(string="aliment_bool")
